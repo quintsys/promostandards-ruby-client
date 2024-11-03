@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Yamllint
-        uses: karancode/yamllint-github-action@v2
+        uses: karancode/yamllint-github-action@master
         with:
           yamllint_strict: true
           yamllint_format: parsable
