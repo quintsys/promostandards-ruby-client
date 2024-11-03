@@ -2,14 +2,12 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in promostandards-ruby-client.gemspec
 gemspec
 
-group :development, :test do
-  gem "rake", "~> 13.0"
-  gem "rspec", "~> 3.0"
-  gem "rubocop", "~> 1.21", require: false
-  gem "rubocop-performance", require: false
-  gem "rubocop-rake", require: false
-  gem "rubocop-rspec", require: false
-end
+gem "bump", require: false
+gem "rake", "~> 13.0"
+gem "rspec", "~> 3.13"
+gem "rubocop", "~> 1.21", require: false
+gem "rubocop-performance", "~> 1.22.0", require: false
+gem "rubocop-rake", "~> 0.6.0", require: false
+gem "rubocop-rspec", "~> 3.2.0", require: false
