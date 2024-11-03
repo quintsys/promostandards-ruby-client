@@ -1,0 +1,20 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+tags
+
+# Dependencies to resolve based on the consuming application’s constraints
+Gemfile.lock
+
+# rspec failure tracking
+.rspec_status
+
+# Gemset and Ruby version
+.ruby-gemset
+.ruby-version
+
