@@ -5,8 +5,8 @@ require_relative "lib/promostandards/ruby/client/version"
 Gem::Specification.new do |spec|
   spec.name = "promostandards-ruby-client"
   spec.version = Promostandards::Ruby::Client::VERSION
-  spec.authors = ["Erich N Quintero"]
-  spec.email = ["qbantek@gmail.com"]
+  spec.authors = ["Quintero Systems, Inc."]
+  spec.email = ["contact@quintsys.com"]
 
   spec.summary = "Ruby client for accessing PromoStandards API services."
   spec.description = "A Ruby gem for interacting with PromoStandards API " \
@@ -18,11 +18,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/quintsys/" \
-                                     "promostandards-ruby-client"
-  spec.metadata["changelog_uri"] = "https://github.com/quintsys/" \
-                                   "promostandards-ruby-client/blob/master/" \
-                                   "CHANGELOG.md"
+  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/master/CHANGELOG.md"
 
   gemspec = File.basename(__FILE__)
   spec.files =
