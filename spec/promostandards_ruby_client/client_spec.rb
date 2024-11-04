@@ -1,32 +1,26 @@
 # frozen_string_literal: true
 
 RSpec.describe PromostandardsRubyClient::Client do
-  let(:custom_logger) { Logger.new("/dev/null") }
-  let(:custom_service_url) { "https://custom-service-url.com" }
-
-  after do
-    described_class.configuration = nil
-  end
+  after { described_class.configuration = nil }
 
   it "has a version number" do
     expect(PromostandardsRubyClient::VERSION).not_to be_nil
   end
 
   describe ".configure" do
-    before do
-      described_class.configure do |config|
-        config.pricing_service_url = custom_service_url
-        config.logger = custom_logger
+    %i[product_data_service_url
+       media_content_service_url
+       pricing_service_url
+       id
+       password
+       currency
+       localization_country
+       localization_language
+       logger].each_with_index do |setting, index|
+      it "allows setting a #{setting}" do
+        described_class.configure { |c| c.send(:"#{setting}=", index) }
+        expect(described_class.configuration.send(setting)).to eq(index)
       end
-    end
-
-    it "allows setting a global pricing_service_url" do
-      expect(described_class.configuration.pricing_service_url)
-        .to(eq(custom_service_url))
-    end
-
-    it "allows setting a global logger" do
-      expect(described_class.configuration.logger).to eq(custom_logger)
     end
   end
 
@@ -35,14 +29,11 @@ RSpec.describe PromostandardsRubyClient::Client do
     let(:password) { "test_password" }
 
     context "with global configuration that includes credentials" do
-      before do
+      it "does not raise an error" do
         described_class.configure do |config|
           config.id = id
           config.password = password
         end
-      end
-
-      it "does not raise an error" do
         expect { described_class.new }.not_to raise_error
       end
     end
