@@ -1,4 +1,4 @@
-# Promostandards::Ruby::Client
+# PromostandardsRubyClient
 
 **promostandards-ruby-client** is an unofficial Ruby client for accessing
 PromoStandards API services, designed to simplify integration with
