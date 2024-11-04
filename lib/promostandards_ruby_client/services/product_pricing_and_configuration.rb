@@ -13,7 +13,7 @@ module PromostandardsRubyClient
     # == Usage
     #
     #   # Example call to get product configuration and pricing
-    #   client = PromoStandardsRubyClient::Client.new
+    #   client = PromostandardsRubyClient::Client.new
     #   response = client.get_configuration_and_pricing("G500")
     #
     # == Methods
