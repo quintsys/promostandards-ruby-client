@@ -65,7 +65,7 @@ Bug reports and pull requests are welcome on GitHub at
 [https://github.com/quintsys/promostandards-ruby-client](https://github.com/quintsys/promostandards-ruby-client).
 This project aims to be a safe, welcoming space for collaboration, and
 contributors are expected to adhere to the
-[code of conduct](https://github.com/quintsys/promostandards-ruby-client/blob/main/CODE_OF_CONDUCT.md).
+[code of conduct](https://github.com/quintsys/promostandards-ruby-client/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -76,4 +76,4 @@ The gem is available as open source under the terms of the
 
 Everyone interacting in the Promostandards::Ruby::Client project's codebases,
 issue trackers, chat rooms and mailing lists is expected to follow the
-[code of conduct](https://github.com/quintsys/promostandards-ruby-client/blob/main/CODE_OF_CONDUCT.md).
+[code of conduct](https://github.com/quintsys/promostandards-ruby-client/blob/master/CODE_OF_CONDUCT.md).
