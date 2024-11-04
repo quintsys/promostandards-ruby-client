@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/promostandards/ruby/client/version"
+require_relative "lib/promostandards_ruby_client/version"
 
 Gem::Specification.new do |spec|
   spec.name = "promostandards-ruby-client"
-  spec.version = Promostandards::Ruby::Client::VERSION
+  spec.version = PromostandardsRubyClient::VERSION
   spec.authors = ["quintsys"]
   spec.email = ["contact@quintsys.com"]
 
@@ -36,4 +36,6 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
+
+  spec.add_dependency("logger")
 end
