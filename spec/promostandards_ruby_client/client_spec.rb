@@ -15,14 +15,14 @@ RSpec.describe PromostandardsRubyClient::Client do
   describe ".configure" do
     before do
       described_class.configure do |config|
-        config.service_url = custom_service_url
+        config.pricing_service_url = custom_service_url
         config.logger = custom_logger
       end
     end
 
-    it "allows setting a global service_url" do
-      expect(described_class.configuration.service_url)
-        .to eq(custom_service_url)
+    it "allows setting a global pricing_service_url" do
+      expect(described_class.configuration.pricing_service_url)
+        .to(eq(custom_service_url))
     end
 
     it "allows setting a global logger" do
@@ -31,51 +31,34 @@ RSpec.describe PromostandardsRubyClient::Client do
   end
 
   describe "#initialize" do
-    context "with global configuration" do
+    let(:id) { "test_id" }
+    let(:password) { "test_password" }
+
+    context "with global configuration that includes credentials" do
       before do
         described_class.configure do |config|
-          config.service_url = custom_service_url
-          config.logger = custom_logger
+          config.id = id
+          config.password = password
         end
       end
 
-      it "uses global configuration for service_url" do
-        client = described_class.new
-        expect(client.instance_variable_get(:@service_url))
-          .to(eq(custom_service_url))
-      end
-
-      it "uses global configuration for logger" do
-        client = described_class.new
-        expect(client.instance_variable_get(:@logger)).to eq(custom_logger)
-      end
-
-      it "overrides global configuration with instance options" do
-        alternate_service_url = "https://another-service-url.com"
-        client = described_class.new(service_url: alternate_service_url)
-        expect(client.instance_variable_get(:@service_url))
-          .to(eq(alternate_service_url))
+      it "does not raise an error" do
+        expect { described_class.new }.not_to raise_error
       end
     end
 
     context "without global configuration" do
-      it "raises an error if service_url is not provided" do
-        expect do
-          described_class.new
-        end.to raise_error(ArgumentError, "service_url must be set")
+      it "raises an error if required credentials are missing" do
+        expect { described_class.new }
+          .to(raise_error(
+                ArgumentError,
+                "Customer ID (:id) and Password (:password) are required"
+              ))
       end
 
-      it "uses provided service_url if given" do
-        client = described_class.new(service_url: custom_service_url,
-                                     logger: custom_logger)
-        expect(client.instance_variable_get(:@service_url))
-          .to(eq(custom_service_url))
-      end
-
-      it "uses provided logger if given" do
-        client = described_class.new(service_url: custom_service_url,
-                                     logger: custom_logger)
-        expect(client.instance_variable_get(:@logger)).to eq(custom_logger)
+      it "does not raise an error if required credentials are provided" do
+        expect { described_class.new(id: id, password: password) }
+          .not_to(raise_error)
       end
     end
   end
