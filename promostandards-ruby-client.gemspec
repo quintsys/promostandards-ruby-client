@@ -5,20 +5,25 @@ require_relative "lib/promostandards/ruby/client/version"
 Gem::Specification.new do |spec|
   spec.name = "promostandards-ruby-client"
   spec.version = Promostandards::Ruby::Client::VERSION
-  spec.authors = ["Quintero Systems, Inc."]
+  spec.authors = ["quintsys"]
   spec.email = ["contact@quintsys.com"]
 
   spec.summary = "Ruby client for accessing PromoStandards API services."
-  spec.description = "A Ruby gem for interacting with PromoStandards API " \
-                     "services, making it easier for developers to integrate " \
-                     "PromoStandards data into their Ruby applications."
+  spec.description = <<~HERE
+    A Ruby gem for interacting with PromoStandards API services, making it
+    easier for developers to integrate PromoStandards data into their
+    Ruby applications.
+  HERE
   spec.homepage = "https://github.com/quintsys/promostandards-ruby-client"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
-  spec.metadata["allowed_push_host"] = "https://rubygems.org"
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/master/CHANGELOG.md"
+  spec.metadata = {
+    "allowed_push_host" => "https://rubygems.org",
+    "homepage_uri" => spec.homepage,
+    "changelog_uri" => "#{spec.homepage}/blob/master/CHANGELOG.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   gemspec = File.basename(__FILE__)
   spec.files =
@@ -31,6 +36,4 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.metadata["rubygems_mfa_required"] = "true"
 end
