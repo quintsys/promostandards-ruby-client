@@ -4,48 +4,66 @@ require "logger"
 
 module PromostandardsRubyClient
   # The Configuration class provides a way to set up and manage configuration
-  # options for the gem.
+  # options for the PromostandardsRubyClient gem, allowing for flexible defaults
+  # for various PromoStandards services.
   #
   # == Usage
   #
-  # Configuration can be set for the application in a Rails initializer:
+  # Configuration can be set globally for the application, typically in a
+  # Rails initializer:
   #
   #   # config/initializers/promostandards_ruby_client.rb
   #   PromostandardsRubyClient::Client.configure do |config|
-  #     config.service_url = 'https://custom-service-url.com'
+  #     # Authentication parameters, always required
+  #     config.id = Rails.application.credentials.dig(:vendor, :account_id)
+  #     config.password = Rails.application.credentials.dig(:vendor, :password)
+  #
+  #     # service URLs, required to interact with the service
+  #     config.pricing_service_url = 'https://pricing-service-url.com'
+  #
+  #     # Optional parameters
+  #     config.currency = 'USD'
+  #     config.localization_country = 'US'
+  #     config.localization_language = 'EN'
   #     config.logger = Rails.logger
   #   end
   #
-  # Alternatively, configuration options can be passed directly when
-  # creating an instance of the client:
-  #
-  #   client = PromostandardsRubyClient::Client.new(
-  #     service_url: 'https://another-service-url.com',
-  #     logger: custom_logger
-  #   )
+  # Alternatively, configuration options can be passed directly when creating
+  # an instance of the client.
   #
   # == Attributes
   #
-  # * +service_url+ - The base URL for the PromoStandards-compatible
-  #   service.
-  #
-  # * +logger+ - A logger with an API compatible with Rails.logger (
-  #   responding to +info+, +warn+, +error+, etc.). Defaults to a standard
-  #   Logger instance outputting to STDOUT.
+  # * +pricing_service_url+ - The base URL for the Product Pricing and
+  #   Configuration service.
+  # * +product_data_service_url+ - The base URL for the Product Data service.
+  # * +media_content_service_url+ - The base URL for the Media Content service.
+  # * +id+ - The customer ID for authentication with PromoStandards services.
+  # * +password+ - Optional password for additional authentication if required
+  #   by the service.
+  # * +currency+ - The default currency for pricing requests. Defaults to "USD".
+  # * +localization_country+ - ISO country code for localization (e.g., "US").
+  #   Defaults to "US".
+  # * +localization_language+ - ISO language code for localization.
+  #   Defaults to "EN".
+  # * +logger+ - A logger compatible with Rails.logger (responds to +info+,
+  #   +warn+, +error+, etc.).
+  #   Defaults to a Rails.logger if defined or a standard Logger instance
+  #   outputting to STDOUT.
   #
   class Configuration
-    # The base URL for the PromoStandards-compatible service.
-    # This attribute is required; it must be set in either global
-    # configuration or directly passed to the client instance. If not set,
-    # an error will be raised.
-    attr_accessor :service_url
-    # A logger with an API compatible with Rails.logger (responding to
-    # +info+, +warn+, +error+, etc.). Defaults to a standard Logger
-    # instance outputting to STDOUT.
-    attr_accessor :logger
+    attr_accessor :product_data_service_url, :media_content_service_url,
+                  :pricing_service_url, :id, :password, :currency,
+                  :localization_country, :localization_language, :logger
 
     def initialize
-      @logger = ::Logger.new($stdout)
+      @currency = "USD"
+      @localization_country = "US"
+      @localization_language = "EN"
+      @logger = if defined?(Rails) && Rails.logger
+                  Rails.logger
+                else
+                  Logger.new($stdout)
+                end
     end
   end
 end
